@@ -2,6 +2,7 @@
   "name": "gibberish-pasta",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://gibberish-pasta.appspot.com/",
   "dependencies": {
     "@material-ui/core": "^4.7.2",
     "google-translate": "^3.0.0",
