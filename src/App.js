@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { googleTranslate } from "./utils/googleTranslate";
+import { Form } from "./form/Form";
+
+import "./App.css";
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { translatedString: "" };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(text) {
+    this.getTranslation(text);
+  }
+
+  getTranslation(text) {
+    googleTranslate.translate(
+      text,
+      "sv",
+      function(err, translation) {
+        console.log(translation.translatedText);
+        this.setState({ translatedString: translation.translatedText });
+      }.bind(this)
+    );
+  }
+
+  render() {
+    return (
+      <div className="Aligner">
+        <Form
+          translatedText={this.state.translatedString}
+          onSubmit={this.handleSubmit}
+        ></Form>
+      </div>
+    );
+  }
 }
 
 export default App;
